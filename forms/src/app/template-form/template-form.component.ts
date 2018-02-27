@@ -21,7 +21,14 @@ export class TemplateFormComponent implements OnInit {
 
   onSubmit(form) {
     console.log(form);
-    console.log(this.usuario);
+
+    // form.value();
+    // console.log(this.usuario);
+
+    this.http.post('http://httpbin.org/post', JSON.stringify(form.value))
+      .map(res => res)
+      .subscribe(dados => console.log(dados));
+
   }
 
   verificaValidTouched(campo) {
@@ -84,7 +91,7 @@ export class TemplateFormComponent implements OnInit {
   }
 
   resetaDadosFormulario(formulario) {
-    formulario.for.patchValue({
+    formulario.form.patchValue({
       endereco: {
         cep: null,
         logradouro: null,
